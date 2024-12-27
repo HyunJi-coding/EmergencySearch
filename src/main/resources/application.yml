@@ -36,7 +36,7 @@ spring:
       ddl-auto: validate
     show-sql: true
 
-pharmacy:
+emergency:
   recommendation:
     base:
       url: http://localhost:8080/dir/
@@ -48,18 +48,18 @@ spring:
       on-profile: prod
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://pharmacy-recommendation-database:3306/pharmacy-recommendation
+    url: jdbc:mariadb://emergency-recommendation-database:3306/emergency-recommendation
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
   redis:
-    host: pharmacy-recommendation-redis
+    host: emergency-recommendation-redis
     port: 6379
   jpa:
     hibernate:
       ddl-auto: validate
     show-sql: true
 
-pharmacy:
+emergency:
   recommendation:
     base:
       url: http://3.38.78.187/dir/
