@@ -5,6 +5,8 @@ import com.example.demo.emergency.entity.Emergency
 import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Specification
 
+import java.time.LocalDateTime
+
 class EmergencyRepositoryTest extends AbstractIntegrationContainerBaseTest{
 
     @Autowired
@@ -62,5 +64,25 @@ class EmergencyRepositoryTest extends AbstractIntegrationContainerBaseTest{
         result.get(0).getLatitude() == latitude
         result.get(0).getLongitude() == longitude
     }
+
+    def "BaseTimeEntity_등록"() {
+
+        given:
+        def now = LocalDateTime.now()
+        String address = "서울 특별시 성북구 종암동"
+        String name = "삼성서울병원 응급실"
+
+        def emergency = Emergency.builder()
+                .emergencyAddress(address)
+                .emergencyName(name)
+                .build()
+        when:
+        emergencyRepository.save(emergency)
+        def result = emergencyRepository.findAll()
+        then:
+        result.get(0).getCreatedDate().isAfter(now)
+        result.get(0).getModifiedDate().isAfter(now)
+    }
+
 }
 
