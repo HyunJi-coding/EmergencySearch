@@ -38,7 +38,7 @@ class EmergencyRepositoryTest extends AbstractIntegrationContainerBaseTest{
         result.getLongitude() == longitude
     }
 
-    def "PharmacyRepository saveAll"() {
+    def "EmergencyRepository saveAll"() {
 
         given:
         String address = "서울 특별시 강남구 일원로 81"
@@ -46,19 +46,19 @@ class EmergencyRepositoryTest extends AbstractIntegrationContainerBaseTest{
         double latitude = 36.11
         double longitude = 128.11
 
-        def pharmacy = Pharmacy.builder()
-                .pharmacyAddress(address)
-                .pharmacyName(name)
+        def emergency = Emergency.builder()
+                .emergencyAddress(address)
+                .emergencyName(name)
                 .latitude(latitude)
                 .longitude(longitude)
                 .build()
         when:
-        pharmacyRepositoryService.saveAll(Arrays.asList(pharmacy))
-        def result = pharmacyRepository.findAll()
+        emergencyRepository.saveAll(Arrays.asList(emergency))
+        def result = emergencyRepository.findAll()
 
         then:
-        result.get(0).getPharmacyAddress() == address
-        result.get(0).getPharmacyName() == name
+        result.get(0).getEmergencyAddress() == address
+        result.get(0).getEmergencyName() == name
         result.get(0).getLatitude() == latitude
         result.get(0).getLongitude() == longitude
     }
