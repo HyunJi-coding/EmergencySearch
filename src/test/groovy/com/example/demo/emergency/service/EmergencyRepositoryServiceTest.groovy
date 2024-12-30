@@ -18,7 +18,7 @@ class EmergencyRepositoryServiceTest extends AbstractIntegrationContainerBaseTes
         emergencyRepository.deleteAll()
     }
 
-    def "PharmacyRepository update - dirty checking success"() {
+    def "EmergencyRepository update - dirty checking success"() {
 
         given:
         String inputAddress = "서울 특별시 성북구 종암동"
