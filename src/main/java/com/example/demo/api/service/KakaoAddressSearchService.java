@@ -32,6 +32,7 @@ public class KakaoAddressSearchService {
             maxAttempts = 2,
             backoff = @Backoff(delay = 2000)
     )
+
     public KakaoApiResponseDto requestAddressSearch(String address){
 
         if(ObjectUtils.isEmpty(address)) return null;

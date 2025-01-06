@@ -20,4 +20,10 @@ public class DocumentDto {
 
     @JsonProperty("y")
     private double latitude;
+
+    @JsonProperty("place_name")
+    private String placeName;
+
+    @JsonProperty("distance")
+    private double distance;
 }

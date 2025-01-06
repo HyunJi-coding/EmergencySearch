@@ -32,7 +32,9 @@ public class EmergencyRecommendationService {
 
         DocumentDto documentDto = kakaoApiResponseDto.getDocumentDtoList().get(0);
 
-        List<Direction> directionList = directionService.buildDirectionList(documentDto);
+//        List<Direction> directionList = directionService.buildDirectionList(documentDto);
+        List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto);
+
 
         directionService.saveAll(directionList);
     }
