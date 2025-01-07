@@ -4,7 +4,6 @@ import com.example.demo.AbstractIntegrationContainerBaseTest
 import com.example.demo.emergency.entity.Emergency
 import com.example.demo.emergency.repository.EmergencyRepository
 import org.springframework.beans.factory.annotation.Autowired
-import spock.lang.Specification
 
 class EmergencyRepositoryServiceTest extends AbstractIntegrationContainerBaseTest {
 
