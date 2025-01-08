@@ -3,6 +3,7 @@ package com.example.demo.emergency.service;
 import com.example.demo.api.dto.DocumentDto;
 import com.example.demo.api.dto.KakaoApiResponseDto;
 import com.example.demo.api.service.KakaoAddressSearchService;
+import com.example.demo.direction.dto.OutputDto;
 import com.example.demo.direction.entity.Direction;
 import com.example.demo.direction.service.DirectionService;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -21,21 +24,35 @@ public class EmergencyRecommendationService {
     private final KakaoAddressSearchService kakaoAddressSearchService;
     private final DirectionService directionService;
 
-    public void recommendEmergencyList(String address) {
+    public List<OutputDto> recommendEmergencyList(String address) {
 
         KakaoApiResponseDto kakaoApiResponseDto = kakaoAddressSearchService.requestAddressSearch(address);
 
         if (Objects.isNull(kakaoApiResponseDto) || CollectionUtils.isEmpty(kakaoApiResponseDto.getDocumentDtoList())) {
             log.error("[EmergencyRecommendationService.recommendEmergencyList fail] Input address: {}", address);
-            return;
+            return Collections.emptyList();
         }
 
         DocumentDto documentDto = kakaoApiResponseDto.getDocumentDtoList().get(0);
 
-//        List<Direction> directionList = directionService.buildDirectionList(documentDto);
-        List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto);
+        List<Direction> directionList = directionService.buildDirectionList(documentDto);
+//        List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto);
 
 
-        directionService.saveAll(directionList);
+        return directionService.saveAll(directionList)
+                .stream()
+                .map(this::convertToOutputDto)
+                .collect(Collectors.toList());
+    }
+
+    private OutputDto convertToOutputDto(Direction direction) {
+
+        return OutputDto.builder()
+                .emergencyName(direction.getTargetEmergencyName())
+                .emergencyAddress(direction.getTargetAddress())
+                .directionUrl("todo")
+                .roadViewUrl("todo")
+                .distance(String.format("%.2f km", direction.getDistance()))
+                .build();
     }
 }
