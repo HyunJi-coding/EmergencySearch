@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +24,10 @@ public class EmergencyRecommendationService {
 
     private final KakaoAddressSearchService kakaoAddressSearchService;
     private final DirectionService directionService;
+
+    private static final String ROAD_VIEW_BASE_URL = "https://map.kakao.com/link/roadview/";
+    private static final String DIRECTION_BASE_URL = "https://map.kakao.com/link/map/";
+
 
     public List<OutputDto> recommendEmergencyList(String address) {
 
@@ -47,11 +52,15 @@ public class EmergencyRecommendationService {
 
     private OutputDto convertToOutputDto(Direction direction) {
 
+        String params = String.join(",", direction.getTargetEmergencyName(), String.valueOf(direction.getTargetLatitude()),
+                String.valueOf(direction.getTargetLongitude()));
+
+        String result = UriComponentsBuilder.fromHttpUrl(DIRECTION_BASE_URL + params).toUriString();
         return OutputDto.builder()
                 .emergencyName(direction.getTargetEmergencyName())
                 .emergencyAddress(direction.getTargetAddress())
-                .directionUrl("todo")
-                .roadViewUrl("todo")
+                .directionUrl(result)
+                .roadViewUrl(ROAD_VIEW_BASE_URL + direction.getTargetLatitude() + "," + direction.getTargetLongitude())
                 .distance(String.format("%.2f km", direction.getDistance()))
                 .build();
     }
