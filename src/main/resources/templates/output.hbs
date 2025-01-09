@@ -23,35 +23,53 @@
         </header>
         <div id="contents">
             <div class="search_main">
-
-                <div class="search_area">
-                    <table class="table table-hover resulttable">
-                        <tr>
-                            <th>응급실</th>
-                            <th>주소</th>
-                            <th>거리</th>
-                            <th>길안내 링크</th>
-                            <th>로드뷰 링크</th>
-                        </tr>
-                        {{#each outputFormList}}
-                            <tr>
-                                <td>{{emergencyName}}</td>
-                                <td>{{emergencyAddress}}</td>
-                                <td>{{distance}}</td>
-                                <td><a href="{{directionUrl}}">{{directionUrl}}</a></td>
-                                <td><a href="{{roadViewUrl}}">{{roadViewUrl}}</a></td>
-                            </tr>
-                        {{/each}}
-                    </table>
+                <div>
+                    <section class="intro">
+                        <div class="mask d-flex align-items-center">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover mb-0">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">응급실</th>
+                                                            <th scope="col">주소</th>
+                                                            <th scope="col">거리</th>
+                                                            <th scope="col">길안내</th>
+                                                            <th scope="col">로드뷰</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {{#each outputFormList}}
+                                                            <tr>
+                                                                <td>{{emergencyName}}</td>
+                                                                <td>{{emergencyAddress}}</td>
+                                                                <td>{{distance}}</td>
+                                                                <td><a href="{{directionUrl}}">{{directionUrl}}</a></td>
+                                                                <td><a href="{{roadViewUrl}}">{{roadViewUrl}}</a></td>
+                                                            </tr>
+                                                        {{/each}}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                </fieldset>
             </div>
         </div>
+    </div>
 
-    </div>
-    <div id="bg">
-    </div>
+</div>
+<div id="bg">
+</div>
 </div>
 
 
