@@ -2,6 +2,8 @@ package com.example.demo.direction.controller;
 
 
 import com.example.demo.direction.dto.InputDto;
+import com.example.demo.emergency.dto.EmergencyDetailDto;
+import com.example.demo.emergency.service.EmergencyDetailService;
 import com.example.demo.emergency.service.EmergencyRecommendationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class FormController {
 
     private final EmergencyRecommendationService emergencyRecommendationService;
+    private final EmergencyDetailService emergencyDetailService;
 
     @GetMapping("/")
     public String main(Model model) {
@@ -28,7 +32,6 @@ public class FormController {
         model.addAttribute("isAuthenticated", isAuthenticated);
         return "main";
     }
-
 
     @PostMapping("/search")
     public ModelAndView postDirection(@ModelAttribute InputDto inputDto, Model model)  {
@@ -42,6 +45,13 @@ public class FormController {
                 emergencyRecommendationService.recommendEmergencyList(inputDto.getAddress()));
 
         return modelAndView;
+    }
+
+    @GetMapping("/emergency/{emergencyName}")
+    public String emergencyDetail(@PathVariable String emergencyName, Model model) {
+        EmergencyDetailDto emergencyDetail = emergencyDetailService.getEmergencyDetail(emergencyName);
+        model.addAttribute("emergencyDetail", emergencyDetail);
+        return "detail";
     }
 
 

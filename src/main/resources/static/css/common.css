@@ -73,6 +73,15 @@ header, footer, section, article, aside, nav, hgroup, details, menu, figure, fig
     display: block
 }
 
+.main header .btn_top {
+    position: relative;
+    text-align: right;
+}
+
+.main header .btn_top a:first-child {
+    margin-right: 2px;
+}
+
 legend, .hide {
     position: absolute;
     width: 1px;
@@ -93,7 +102,6 @@ legend, .hide {
     font-size: 16px;
     line-height: 45px
 }
-
 
 #bg {
     position: fixed;
@@ -132,7 +140,7 @@ legend, .hide {
     position: relative;
     z-index: 5;
     width: 1310px;
-    height: 700px !important;
+    height: 700px ;
     margin: 0 auto;
     font-weight: 700;
 }
@@ -149,6 +157,8 @@ legend, .hide {
     z-index: -1;
     text-indent: -9999px;
 }
+
+
 
 .main header {
     position: relative;
@@ -185,33 +195,12 @@ legend, .hide {
     margin-top: -40px;
 }
 
-.main header .logo {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 122px;
-    width: 135px;
-    height: 130px;
-    background: url('../images/logo_main.png') no-repeat;
-    vertical-align: middle
-}
-
 @font-face {
     font-family: 'HakgyoansimNadeuriTTF-B';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimNadeuriTTF-B.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
 }
-
-.main header .btn_top {
-    position: relative;
-    text-align: right;
-}
-
-.main header .btn_top a:first-child {
-    margin-right: 2px;
-}
-
 
 .main header p {
     color: #fff;
@@ -289,6 +278,10 @@ table th {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    /* font-family: 'HakgyoansimNadeuriTTF-B' !important;
+    font-weight: 300;
+    font-style: normal */
+
 }
 
 .card {
@@ -296,5 +289,69 @@ table th {
     font-family: 'HakgyoansimNadeuriTTF-B' !important;
     font-weight: 300;
     font-style: normal
+}
+
+.detail_main {
+    width: 690px;
+    margin: 0 auto
+}
+
+
+
+.search_main .search_area .inptxt {
+    font-family: 'HakgyoansimNadeuriTTF-B' !important;
+    float: left;
+    width: 500px;
+    height: 63px;
+    padding-left: 20px;
+    border: none;
+    background-color: #fff;
+    color: #0d1422;
+    font-weight: inherit;
+    font-size: 26px;
+    line-height: 63px
+}
+
+.search_main .search_area .btn_search {
+    float: left;
+    margin-left: 120px;
+    width: 62px;
+    height: 63px;
+    background: #fff url('../images/spr_icons.png') no-repeat 0 -251px
+}
+
+.main2 .section::before {
+    content: 'Korea Performing Art Archives Network';
+    position: absolute;
+    left: 0;
+    top: 120px;
+    display: block;
+    width: 1312px;
+    height: 677px;
+    z-index: -1;
+    text-indent: -9999px;
+}
+
+.main2 .section {
+    position: relative;
+    z-index: 5;
+    width: 1310px;
+    height: 700px ;
+    margin: 0 auto;
+    font-weight: 700;
+}
+
+.main2 header {
+    position: relative;
+    padding: 18px 0 84px;
+}
+
+.main2 header .btn_top {
+    position: relative;
+    text-align: right;
+}
+
+.main2 header .btn_top a:first-child {
+    margin-right: 2px;
 }
 

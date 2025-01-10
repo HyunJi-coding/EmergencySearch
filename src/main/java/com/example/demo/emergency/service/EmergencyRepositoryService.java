@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -34,5 +35,11 @@ public class EmergencyRepositoryService {
     @Transactional(readOnly = true)
     public List<Emergency> findAll(){
         return emergencyRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Emergency findByEmergencyName(String emergencyName) {
+        Optional<Emergency> emergency = emergencyRepository.findByEmergencyName(emergencyName);
+        return emergency.orElseThrow(() -> new RuntimeException("응급실 정보를 찾을 수 없습니다."));
     }
 }

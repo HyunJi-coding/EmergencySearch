@@ -56,7 +56,7 @@
                                                         <tbody>
                                                         {{#each outputFormList}}
                                                             <tr>
-                                                                <td>{{emergencyName}}</td>
+                                                                <td><a href="/emergency/{{emergencyName}}">{{emergencyName}}</a></td>  <!-- emergencyName을 사용하여 링크 -->
                                                                 <td>{{emergencyAddress}}</td>
                                                                 <td>{{distance}}</td>
                                                                 <td><a href="{{directionUrl}}">바로가기</a></td>
