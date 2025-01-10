@@ -37,7 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/login", "/", "/search", "/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
+
                 .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/", true) // 로그인 성공 후 리다이렉트할 URL
                         .clientRegistrationRepository(clientRegistrationRepository())
                         .authorizedClientService(authorizedClientService())
                         .userInfoEndpoint(user -> user

@@ -203,6 +203,16 @@ legend, .hide {
     font-style: normal;
 }
 
+.main header .btn_top {
+    position: relative;
+    text-align: right;
+}
+
+.main header .btn_top a:first-child {
+    margin-right: 2px;
+}
+
+
 .main header p {
     color: #fff;
     font-size: 18px;
