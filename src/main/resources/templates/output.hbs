@@ -14,6 +14,17 @@
 <div id="wrapper" class="main">
     <div class="section">
         <header>
+            <div class="btn_top">
+                {{#if isAuthenticated}}
+                    <a href="/mypage">
+                        <img src="/images/mypage.png" alt="My Page" class="btn-img">
+                    </a>
+                {{else}}
+                    <a href="/oauth2/authorization/google">
+                        <img src="/images/login.png" alt="Login" class="btn-img">
+                    </a>
+                {{/if}}
+            </div>
 
             <div class="main-ti">
                 <h1>가까운 응급실 검색 <br/>병원 통합 검색</h1>

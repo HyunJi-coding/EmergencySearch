@@ -31,7 +31,10 @@ public class FormController {
 
 
     @PostMapping("/search")
-    public ModelAndView postDirection(@ModelAttribute InputDto inputDto)  {
+    public ModelAndView postDirection(@ModelAttribute InputDto inputDto, Model model)  {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAuthenticated = authentication != null && authentication.isAuthenticated() && !authentication.getPrincipal().equals("anonymousUser");
+        model.addAttribute("isAuthenticated", isAuthenticated);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("output");
