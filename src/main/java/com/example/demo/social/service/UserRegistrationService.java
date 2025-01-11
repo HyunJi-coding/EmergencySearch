@@ -1,7 +1,7 @@
 package com.example.demo.social.service;
 
-import com.example.demo.social.user.entity.User;
-import com.example.demo.social.user.repository.UserRepository;
+import com.example.demo.social.entity.User;
+import com.example.demo.social.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
