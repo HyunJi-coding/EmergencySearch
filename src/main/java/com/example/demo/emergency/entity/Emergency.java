@@ -1,15 +1,14 @@
 package com.example.demo.emergency.entity;
 
 import com.example.demo.BaseTimeEntity;
+import com.example.demo.favorite.entity.Favorite;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "emergency")
 @Getter
@@ -32,6 +31,9 @@ public class Emergency extends BaseTimeEntity {
     private String consultationTimeEnd;
     private double latitude;
     private double longitude;
+
+    @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Favorite> favorites;
 
     public void changeEmergencyAddress(String address){
         this.emergencyAddress = address;

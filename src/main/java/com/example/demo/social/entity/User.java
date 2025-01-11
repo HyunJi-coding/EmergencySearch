@@ -1,14 +1,13 @@
-package com.example.demo.social.user.entity;
+package com.example.demo.social.entity;
 
+import com.example.demo.favorite.entity.Favorite;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "users")
 @Getter
@@ -23,6 +22,9 @@ public class User {
 
     private String name;
     private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Favorite> favorites;
 
     public User(String name, String email){
         this.name = name;
