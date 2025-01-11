@@ -327,10 +327,12 @@ table th {
     top: 120px;
     display: block;
     width: 1312px;
-    height: 677px;
+    min-height: 1000px;
     z-index: -1;
     text-indent: -9999px;
+    padding-bottom: 100px;
 }
+
 
 .main2 .section {
     position: relative;

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmergencyDetailDto {
 
+    private Long id;
     private String emergencyName;
     private String emergencyAddress;
     private String hospitalType;
@@ -19,6 +20,7 @@ public class EmergencyDetailDto {
     private String emergencyPhone;
     private String consultationTimeStart;
     private String consultationTimeEnd;
+    private String directionUrl;
     private double latitude;
     private double longitude;
 

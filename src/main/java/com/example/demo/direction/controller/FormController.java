@@ -6,6 +6,7 @@ import com.example.demo.emergency.dto.EmergencyDetailDto;
 import com.example.demo.emergency.service.EmergencyDetailService;
 import com.example.demo.emergency.service.EmergencyRecommendationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class FormController {
 
     private final EmergencyRecommendationService emergencyRecommendationService;
     private final EmergencyDetailService emergencyDetailService;
+
+    @Value("${kakao.javascript.key}")
+    private String kakaoJavaScriptKey;
 
     @GetMapping("/")
     public String main(Model model) {
@@ -49,8 +53,14 @@ public class FormController {
 
     @GetMapping("/emergency/{emergencyName}")
     public String emergencyDetail(@PathVariable String emergencyName, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAuthenticated = authentication != null && authentication.isAuthenticated() && !authentication.getPrincipal().equals("anonymousUser");
+        model.addAttribute("isAuthenticated", isAuthenticated);
+
         EmergencyDetailDto emergencyDetail = emergencyDetailService.getEmergencyDetail(emergencyName);
         model.addAttribute("emergencyDetail", emergencyDetail);
+        model.addAttribute("kakaoJavaScriptKey", kakaoJavaScriptKey);
+
         return "detail";
     }
 
