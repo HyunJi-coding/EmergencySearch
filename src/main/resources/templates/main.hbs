@@ -14,16 +14,15 @@
 <div id="wrapper" class="main">
     <div class="section">
         <header>
-
             <div class="btn_top">
                 {{#if isAuthenticated}}
                     <a href="/mypage">
                         <img src="/images/mypage.png" alt="My Page" class="btn-img">
                     </a>
                 {{else}}
-                    <a href="/oauth2/authorization/google">
-                        <img src="/images/login.png" alt="Login" class="btn-img">
-                    </a>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <img src="/images/login.png" alt="Login" class="btn-img" />
+                    </button>
                 {{/if}}
             </div>
 
@@ -31,7 +30,6 @@
                 <h1>가까운 응급실 검색 <br/>병원 통합 검색</h1>
                 <p>주소를 입력해주세요. 주소와 가장 가까운 10km 이내 응급실을 알려드립니다.</p>
             </div>
-
         </header>
         <div id="contents">
             <div class="search_main">
@@ -47,7 +45,22 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <a href="/oauth2/authorization/google">
+                        <img src="/images/googlelogin.png"style="width: 40%; margin: 30px auto; display: block;"/>
+                    </a>
+                </div>
 
+            </div>
+        </div>
     </div>
     <div id="bg">
     </div>

@@ -296,7 +296,12 @@ table th {
     margin: 0 auto
 }
 
-
+.modal{
+    border-radius: .5rem;
+    font-family: 'HakgyoansimNadeuriTTF-B' !important;
+    font-weight: 300;
+    font-style: normal
+}
 
 .search_main .search_area .inptxt {
     font-family: 'HakgyoansimNadeuriTTF-B' !important;
@@ -321,7 +326,6 @@ table th {
 }
 
 .main2 .section::before {
-    content: 'Korea Performing Art Archives Network';
     position: absolute;
     left: 0;
     top: 120px;
