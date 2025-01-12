@@ -69,24 +69,44 @@
                     <div class="card-body">
                         <div class="card-body p-4">
                             <div data-mdb-input-init class="form-outline mb-4" style="display: flex; align-items: center; gap: 10px;">
-                                <input
-                                        type="text"
-                                        id="reviewContent"
-                                        class="form-control"
-                                        placeholder="후기를 적어주세요."
-                                        style="flex: 1;"
-                                />
-                                <button
-                                        type="button"
-                                        class="btn btn-light"
-                                        onclick="addReview({{emergencyDetail.id}})"
-                                        data-emergency-id="{{emergencyDetail.id}}"
-                                        data-mdb-ripple-init
-                                        data-mdb-ripple-color="dark"
-                                >
-                                    등록
-                                </button>
+                                {{#if isAuthenticated}}
+                                    <input
+                                            type="text"
+                                            id="reviewContent"
+                                            class="form-control"
+                                            placeholder="후기를 적어주세요."
+                                            style="flex: 1;"
+                                    />
+                                    <button
+                                            type="button"
+                                            class="btn btn-light"
+                                            onclick="addReview({{emergencyDetail.id}})"
+                                            data-emergency-id="{{emergencyDetail.id}}"
+                                            data-mdb-ripple-init
+                                            data-mdb-ripple-color="dark"
+                                    >
+                                        등록
+                                    </button>
+                                {{else}}
+                                    <input
+                                            type="text"
+                                            id="reviewContent"
+                                            class="form-control"
+                                            placeholder="로그인 후 후기를 작성할 수 있습니다."
+                                            style="flex: 1;"
+                                            disabled
+                                    />
+                                    <button
+                                            type="button"
+                                            class="btn btn-light"
+                                            disabled
+                                    >
+                                        등록
+                                    </button>
+
+                                {{/if}}
                             </div>
+
 
                             <div id="reviewList">
                             </div>
@@ -159,7 +179,7 @@
         .then(response => response.json())
         .then(reviews => {
             const reviewList = document.getElementById('reviewList');
-            reviewList.innerHTML = ''; // 기존 내용을 지운다.
+            reviewList.innerHTML = '';
 
             reviews.forEach(review => {
                 const reviewCard = document.createElement('div');
@@ -221,7 +241,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        const emergencyId = {{emergencyDetail.id}};  // 서버에서 전달된 emergencyId 값 사용
+        const emergencyId = {{emergencyDetail.id}};
         loadReviews(emergencyId);
     });
     </script>
