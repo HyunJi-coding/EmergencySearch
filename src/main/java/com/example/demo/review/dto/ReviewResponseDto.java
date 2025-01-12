@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReviewDto {
+public class ReviewResponseDto {
     private String userEmail;
     private String content;
     private LocalDateTime createdDate;
