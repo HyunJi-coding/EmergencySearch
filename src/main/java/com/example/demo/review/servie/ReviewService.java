@@ -9,6 +9,8 @@ import com.example.demo.social.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
@@ -32,6 +34,9 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
+    public List<Review> getReviewsByEmergencyId(Long emergencyId) {
+        return reviewRepository.findByEmergencyIdOrderByCreatedDateDesc(emergencyId);
+    }
 
 }
 

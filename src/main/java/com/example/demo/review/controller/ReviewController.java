@@ -9,9 +9,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -34,6 +38,20 @@ public class ReviewController {
 
         reviewService.addReview(user.getId(), emergencyId, content);
         return "리뷰 추가 완료";
+    }
+
+    @GetMapping("/getReviews")
+    @ResponseBody
+    public List<ReviewResponseDto> getReviews(@RequestParam Long emergencyId) {
+        List<Review> reviews = reviewService.getReviewsByEmergencyId(emergencyId);
+
+        return reviews.stream()
+                .map(review -> new ReviewResponseDto(
+                        review.getUser().getEmail(),
+                        review.getContent(),
+                        review.getCreatedDate()
+                ))
+                .collect(Collectors.toList());
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.demo.social.entity;
 
 import com.example.demo.favorite.entity.Favorite;
 import com.example.demo.review.entity.Review;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -83,29 +83,14 @@
                                         data-emergency-id="{{emergencyDetail.id}}"
                                         data-mdb-ripple-init
                                         data-mdb-ripple-color="dark"
-
                                 >
                                     등록
                                 </button>
                             </div>
 
-                            <div class="card mb-4">
-
-                                <div class="card-body">
-                                    <p>안녕하세용 감사핑~~</p>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <img src="http://www.samohpharm.co.kr/kor/images/sub/noImage.jpg" alt="avatar" width="25"
-                                                 height="25" />
-                                            <p class="small mb-0 ms-2">ehfehfdl4@gmail.com</p>
-                                        </div>
-                                        <div class="d-flex flex-row align-items-center">
-                                            <p class="small text-muted mb-0">2025-01-24</p>
-                                        </div>
-                                    </div>
-                                </div>
-
+                            <div id="reviewList">
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -169,6 +154,40 @@
             .catch(error => console.error('Error:', error));
         }
 
+        function loadReviews(emergencyId) {
+    fetch(`/getReviews?emergencyId=${emergencyId}`)
+        .then(response => response.json())
+        .then(reviews => {
+            const reviewList = document.getElementById('reviewList');
+            reviewList.innerHTML = ''; // 기존 내용을 지운다.
+
+            reviews.forEach(review => {
+                const reviewCard = document.createElement('div');
+                reviewCard.classList.add('card', 'mb-4');
+                reviewCard.innerHTML = `
+                    <div class="card-body">
+                        <p>${review.content}</p>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-row align-items-center">
+                                <img src="http://www.samohpharm.co.kr/kor/images/sub/noImage.jpg" alt="avatar" width="25" height="25" />
+                                <p class="small mb-0 ms-2">${review.userEmail}</p>
+                            </div>
+                            <div class="d-flex flex-row align-items-center">
+                                <p class="small text-muted mb-0">${new Date(review.createdDate).toLocaleString()}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                reviewList.appendChild(reviewCard);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading reviews:', error);
+            alert('리뷰를 불러오는 중 오류가 발생했습니다.');
+        });
+}
+
+
         function addReview(emergencyId) {
         const contentInput = document.getElementById('reviewContent');
         const content = contentInput.value.trim();
@@ -189,7 +208,7 @@
         .then(result => {
             if (result === '리뷰 추가 완료') {
                 alert(result);
-                addReviewToList(content);
+                loadReviews(emergencyId);
                 contentInput.value = '';
             } else {
                 alert('리뷰 등록에 실패했습니다.');
@@ -200,6 +219,11 @@
             alert('리뷰 등록 중 오류가 발생했습니다.');
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const emergencyId = {{emergencyDetail.id}};  // 서버에서 전달된 emergencyId 값 사용
+        loadReviews(emergencyId);
+    });
     </script>
 
 </body>
