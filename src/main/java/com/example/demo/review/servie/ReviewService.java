@@ -38,5 +38,9 @@ public class ReviewService {
         return reviewRepository.findByEmergencyIdOrderByCreatedDateDesc(emergencyId);
     }
 
+    public List<Review> getReviewsByUserId(Long userId) {
+        return reviewRepository.findByUserId(userId);
+    }
+
 }
 

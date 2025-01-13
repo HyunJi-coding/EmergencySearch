@@ -54,4 +54,24 @@ public class ReviewController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/myReviews")
+    @ResponseBody
+    public List<ReviewResponseDto> getMyReviews(Authentication authentication) {
+        OAuth2User principal = (OAuth2User) authentication.getPrincipal();
+        String email = (String) principal.getAttributes().get("email");
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        List<Review> reviews = reviewService.getReviewsByUserId(user.getId());
+
+        return reviews.stream()
+                .map(review -> new ReviewResponseDto(
+                        review.getUser().getEmail(),
+                        review.getContent(),
+                        review.getCreatedDate()
+                ))
+                .collect(Collectors.toList());
+    }
+
 }
