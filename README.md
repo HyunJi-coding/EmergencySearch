@@ -4,7 +4,7 @@
 <br>
 <h3>1. 기술 스택<br></h3>
 Java: 11<br>
-Spring Boot: 2.7.10<br>
+Spring Boot: 2.6.7<br>
 database: MariaDB, Redis<br>
 build: Gradle<br>
 
